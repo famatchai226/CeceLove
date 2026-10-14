@@ -1,0 +1,9 @@
+.env
+.DS_Store
+node_modules/
+.vercel/
+.vercel
+.gemini/
+brain/
+*.log
+.env*.local

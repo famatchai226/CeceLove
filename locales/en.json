@@ -1,0 +1,122 @@
+{
+  "lang": "en",
+  "meta": {
+    "title": "CeceLove — The Exclusive Film for Mature Men | Baltazar",
+    "description": "Discover CeceLove, an exclusive film reserved for the mature and discreet man. Instant access, secure payment and 100% private via Baltazar."
+  },
+  "nav": {
+    "cta": "🔥 Buy Now"
+  },
+  "hero": {
+    "badge": "🔥 Exclusive Film — Limited Edition",
+    "title": "<em>CeceLove</em><br />The film that awakens<br />the mature man 🔥",
+    "desc": "An intense story, filmed with rare realism. <strong>Instant and 100% discreet access</strong> — the link is delivered to your email right after payment.",
+    "cta": "⚡ Watch CeceLove — 1,500 FCFA",
+    "price_note": "One-time payment · Lifetime access",
+    "trust_secure": "Secure Payment",
+    "trust_instant": "Instant Access",
+    "trust_private": "100% Private",
+    "trust_email": "Link via Email"
+  },
+  "stats": {
+    "value1": "HD",
+    "label1": "Cinema quality",
+    "value2": "∞",
+    "label2": "Lifetime access",
+    "value3": "100%",
+    "label3": "Private & discreet",
+    "value4": "1,500",
+    "label4": "FCFA only"
+  },
+  "trailer": {
+    "label": "Trailer",
+    "title": "A glimpse of <em>CeceLove</em>",
+    "subtitle": "Step into the atmosphere of the film before watching it in full.",
+    "src": "./assets/trailer.mp4",
+    "note": "🔒 100% private and secure playback."
+  },
+  "synopsis": {
+    "label": "The story",
+    "title": "CeceLove, <em>an experience like no other</em>",
+    "p1": "CeceLove tells the scorching encounter between two people that everything opposes, carried by cinematic staging and an intensity rarely reached in this genre.",
+    "p2": "Every shot was designed to create total immersion. Crafted lighting, careful framing, rhythmic editing: a film built to captivate from the very first seconds.",
+    "quote": "\"A film like no other.\""
+  },
+  "offer": {
+    "label": "What you get",
+    "title": "Here's exactly what<br />you will receive:",
+    "desc": "A private streaming link to the full CeceLove film.",
+    "card1_label": "Full film",
+    "card1_title": "CeceLove in HD",
+    "card1_desc": "The complete film, uncut, in high definition.",
+    "card2_label": "Instant access",
+    "card2_title": "Private link",
+    "card2_desc": "A secure link sent by email as soon as your payment is validated.",
+    "card3_label": "Lifetime access",
+    "card3_title": "Re-watch anytime",
+    "card3_desc": "Watch and re-watch the film whenever you want.",
+    "total_label": "Total value",
+    "total_value": "15,000 FCFA",
+    "price_label": "Today's offer price"
+  },
+  "features": {
+    "label": "Why watch it",
+    "title": "What makes <em>CeceLove</em> unique",
+    "f1_title": "Rare realism",
+    "f1_desc": "An authenticity that makes every scene believable and immersive.",
+    "f2_title": "Cinematic image",
+    "f2_desc": "Image quality and lighting worthy of a feature film.",
+    "f3_title": "Discreet & secure",
+    "f3_desc": "Confidential payment and fully protected data.",
+    "f4_title": "Instant access",
+    "f4_desc": "The streaming link arrives in your email within seconds."
+  },
+  "testimonials": {
+    "label": "Viewer reviews",
+    "title": "+1,500 viewers<br />have already watched it",
+    "t1_text": "Got the link in less than 2 minutes. The film is even better than I imagined.",
+    "t2_text": "Discreet, fast and truly high quality. Nothing to complain about.",
+    "t3_text": "A film that keeps its promises from start to finish. Bravo 👌",
+    "cta_text": "Join the <strong style=\"color:var(--primary);\">1,500 satisfied viewers</strong>."
+  },
+  "faq": {
+    "label": "FAQ",
+    "title": "Frequently Asked Questions",
+    "q1": "How do I receive the film?",
+    "a1": "After your payment, you immediately receive an email containing your private streaming link to the full CeceLove film.",
+    "q2": "Is it really discreet?",
+    "a2": "Yes. The payment is confidential and no personal information is shared. You can buy under a pseudonym.",
+    "q3": "How long do I have access to the film?",
+    "a3": "Once your access is activated, you can watch and re-watch CeceLove for as long as you like.",
+    "q4": "Which payment methods are accepted?",
+    "a4": "Wave, Orange Money, MTN momo, Moov money, Visa and MasterCard. The payment is 100% secure.",
+    "q5": "I'm on iPhone, is it compatible?",
+    "a5": "Yes! If you use an iPhone, prefer the <strong>Safari</strong> browser to open your streaming link."
+  },
+  "cta_section": {
+    "promo_label": "🔥 THIS PROMO IS AVAILABLE FOR RIGHT NOW ONLY",
+    "title": "Ready to discover<br />CeceLove?",
+    "subtitle": "Instant Access · Secure Payment · 100% Discreet",
+    "btn": "🛒 Buy Now — 1,500 FCFA",
+    "warning": "⚠️ <strong>Important:</strong> Make sure to enter your email correctly. You can use a <strong>pseudonym</strong>.",
+    "payment_methods": "Wave, Orange Money, MTN momo, Moov money, Visa, MasterCard"
+  },
+  "upsell": {
+    "label": "Recommended for you",
+    "title": "Our Exclusive Premium Offers",
+    "balta_title": "Baltazar Pack (+2103 Videos, Photos & Comics)",
+    "balta_desc": "The complete Baltazar collection in one private channel.",
+    "balta_btn": "View Baltazar Offer →",
+    "bd_title": "Pack +14,838 Adult Comics & Manga",
+    "bd_desc": "Exclusive collection of adult comics.",
+    "bd_btn": "View Comics Offer →"
+  },
+  "footer": {
+    "contact_intro": "A problem? Contact us:",
+    "copyright": "© 2024 Baltazar. All rights reserved. Content exclusively for adults."
+  },
+  "float_bar": {
+    "text": "🔥 CeceLove: <strong>1,500 FCFA</strong> instead of 15,000 FCFA",
+    "btn": "Buy 🛒"
+  }
+}
