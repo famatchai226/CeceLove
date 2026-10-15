@@ -49,10 +49,13 @@ Code de sortie `0` = la vidéo se scrube correctement.
 `seek-probe.js` et `scrub-probe.js` sont les scripts injectés dans la page
 (`Runtime.evaluate`) ; ils ne s'exécutent pas seuls.
 
-## 4. `check-links.js` — liens de paiement & fichiers de langue
-Liste tous les CTA de `index.html` (clé i18n → URL), vérifie que les deux boutons
-d'upsell pointent vers les bons produits `mymaketou.shop`, que `fr.json` / `en.json`
-sont valides et que la vidéo est bien en faststart.
+## 4. `check-links.js` — liens sortants & fichiers de langue
+Liste tous les CTA externes d'`index.html` (clé i18n → URL) et vérifie :
+- les **boutons d'upsell** → landing pages des produits sœurs
+  (`balta.famatchai226.workers.dev`, `bd.famatchai226.workers.dev`), croisées avec
+  la source de vérité `../boutique-landing-page/how.md` ;
+- les **4 boutons d'achat** → checkout MyMaketou du film CeceLove ;
+- `fr.json` / `en.json` valides + vidéo bien en faststart.
 
 ```powershell
 node _tools/check-links.js      # code de sortie 0 = tout est vert

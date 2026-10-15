@@ -1,5 +1,6 @@
-/* Vérifie que les boutons upsell pointent bien vers les vrais produits et que les
-   fichiers de langue sont cohérents. Usage: node _tools/_check-links.js */
+/* Vérifie les liens de la page (upsell -> landing pages sœurs, boutons d'achat -> checkout)
+   et la cohérence des fichiers de langue + du média.
+   Usage: node _tools/check-links.js */
 const fs = require('fs');
 const path = require('path');
 
@@ -17,23 +18,47 @@ function findRoot(start) {
 const ROOT = findRoot(__dirname);
 const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 
-const anchors = [...html.matchAll(/<a href="([^"]*mymaketou[^"]*)"[\s\S]{0,200}?data-i18n="([^"]+)"/g)];
-console.log('--- tous les CTA de la page (clé i18n -> URL) ---');
-anchors.forEach(a => console.log('  ' + a[2].padEnd(20) + ' ' + a[1]));
+const anchors = [...html.matchAll(/<a href="(https?:\/\/[^"]+)"[\s\S]{0,200}?data-i18n="([^"]+)"/g)];
+console.log('--- tous les CTA externes de la page (clé i18n -> URL) ---');
+anchors.forEach(a => console.log('  ' + a[2].padEnd(18) + ' ' + a[1]));
 
-const EXPECT = {
-  'upsell.balta_btn': '/products/veux-tu-1385-video-289-photo-260-bd-video-baltazar-et-du-petit-baltazar-inclu/checkout',
-  'upsell.bd_btn': '/products/veut-tu-14838-pdf-bd-hentai-pour-homme-mature-/checkout'
+/* Les boutons « upsell » renvoient vers la landing page dédiée du produit
+   (même convention que kera- / gotelegram- / boutique-landing-page). */
+const LANDING = {
+  'upsell.balta_btn': 'https://balta.famatchai226.workers.dev/',
+  'upsell.bd_btn': 'https://bd.famatchai226.workers.dev/'
 };
+/* Les boutons d'achat de cette page renvoient vers le checkout MyMaketou du film CeceLove. */
+const CHECKOUT_URL = 'https://baltazar.mymaketou.shop/products/veux-un-film-pour-homme-mature/checkout';
+const CHECKOUT = ['nav.cta', 'hero.cta', 'cta_section.btn', 'float_bar.btn'];
 
 let problems = 0;
 const ck = (ok, msg) => { console.log((ok ? 'PASS  ' : 'FAIL  ') + msg); if (!ok) problems++; };
+const has = (key, url) => { const f = anchors.find(a => a[2] === key); return !!f && f[1] === url; };
+const show = key => { const f = anchors.find(a => a[2] === key); return f ? f[1] : 'INTROUVABLE'; };
 
 console.log('');
-console.log('--- boutons upsell du bas de page ---');
-for (const [key, url] of Object.entries(EXPECT)) {
-  const found = anchors.find(a => a[2] === key);
-  ck(!!found && found[1].endsWith(url), key + ' -> ' + (found ? found[1] : 'INTROUVABLE'));
+console.log('--- upsell : landing pages des produits sœurs ---');
+for (const [key, url] of Object.entries(LANDING)) {
+  ck(has(key, url), key + ' -> ' + show(key) + (has(key, url) ? '' : '  (attendu : ' + url + ')'));
+}
+
+console.log('');
+console.log('--- boutons d\'achat : checkout CeceLove ---');
+for (const key of CHECKOUT) {
+  ck(has(key, CHECKOUT_URL), key + ' -> ' + show(key) + (has(key, CHECKOUT_URL) ? '' : '  (attendu : ' + CHECKOUT_URL + ')'));
+}
+
+console.log('');
+console.log('--- source de vérité : boutique-landing-page/how.md ---');
+const doc = path.resolve(ROOT, '..', 'boutique-landing-page', 'how.md');
+if (fs.existsSync(doc)) {
+  const txt = fs.readFileSync(doc, 'utf8');
+  for (const [key, url] of Object.entries(LANDING)) {
+    ck(txt.includes(url), key + ' documenté dans how.md (' + url + ')');
+  }
+} else {
+  console.log('  (non trouvé : ' + doc + ' — vérification ignorée)');
 }
 
 console.log('');

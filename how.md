@@ -24,12 +24,20 @@ cecelove-landing-page/
 - Les éléments d'`index.html` portent un attribut `data-i18n="section.cle"` (texte),
   `data-i18n-html` (HTML autorisé) ou `data-i18n-video` (source vidéo).
 
-## Lien de paiement
-Le checkout est externe et pointe vers :
-`https://baltazar.mymaketou.shop/products/veux-un-film-pour-homme-mature/checkout`
+## Liens sortants
+- **Boutons d'achat** (nav, hero, `#acheter`, float-bar) → checkout MyMaketou :
+  `https://baltazar.mymaketou.shop/products/veux-un-film-pour-homme-mature/checkout`
+  Pour changer ce lien, remplacez-le sur les **4** boutons d'achat d'`index.html`.
+- **Boutons d'upsell** (bas de page) → **landing pages** des produits sœurs (même convention
+  que `kera-`, `gotelegram-` et `boutique-landing-page`) :
 
-Pour changer de lien, remplacez-le sur tous les boutons d'`index.html`
-(nav, hero, CTA `#acheter`, float-bar, upsell).
+  | Bouton (`data-i18n`) | Destination |
+  |---|---|
+  | `upsell.balta_btn` — Voir l'offre Baltazar → | `https://balta.famatchai226.workers.dev/` |
+  | `upsell.bd_btn` — Voir l'offre BD → | `https://bd.famatchai226.workers.dev/` |
+
+  Contrôle automatique des deux familles de liens + cohérence FR/EN :
+  `node _tools/check-links.js` (doit finir par `RESULT: ALL CHECKS PASSED`).
 
 ## Médias
 - **Hero** : carrousel automatique des 8 visuels `assets/hero caroussel/0.png` … `7.png`
