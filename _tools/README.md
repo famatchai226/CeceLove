@@ -46,6 +46,10 @@ node _tools/seek-test-cecelove.js "C:\chemin\chrome.exe"
 ```
 Code de sortie `0` = la vidéo se scrube correctement.
 
+> ⚠️ Le serveur local de ce test **supporte** `Range` (comme la plupart des serveurs).
+> Si la page en ligne est servie par un hébergeur qui l'ignore, le seek restera dégradé
+> en production même si ce test passe : vérifier avec `node _tools/prod-check.js`.
+
 `seek-probe.js` et `scrub-probe.js` sont les scripts injectés dans la page
 (`Runtime.evaluate`) ; ils ne s'exécutent pas seuls.
 
@@ -60,3 +64,19 @@ Liste tous les CTA externes d'`index.html` (clé i18n → URL) et vérifie :
 ```powershell
 node _tools/check-links.js      # code de sortie 0 = tout est vert
 ```
+
+## 5. `prod-check.js` — contrôle de la page EN LIGNE
+Interroge l'URL déployée (par défaut `https://cecelove.famatchai226.workers.dev/`) et vérifie :
+1. la page répond `200` ;
+2. les 6 CTA de la version en ligne pointent sur les bonnes cibles
+   (upsell → landing pages sœurs, achat → checkout) ;
+3. `assets/trailer.mp4` est bien servi en **faststart** ;
+4. le serveur accepte les requêtes **`Range`** (`206` + `Accept-Ranges: bytes`),
+   condition indispensable pour se déplacer dans la vidéo pendant la lecture.
+
+```powershell
+node _tools/prod-check.js
+node _tools/prod-check.js https://autre-domaine.example/
+```
+Code de sortie `1` si la page ou un lien est cassé. Une absence de support `Range`
+sort en `WARN` (c'est un problème d'hébergement, pas de la page) avec les pistes de correction.

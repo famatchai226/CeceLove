@@ -20,6 +20,26 @@ Déposez ici les médias du film :
 - Bande-annonce : MP4 (H.264), ratio 16:9, 1080p, < 25 Mo pour un chargement rapide.
   (Le fichier actuel : MP4/H.264, 14,7 Mo ✅)
 
+## ⚠️ Deux conditions pour pouvoir se déplacer dans la vidéo
+1. **Le fichier** doit être « faststart » (voir plus bas).
+2. **L'hébergeur** doit accepter les requêtes HTTP `Range` (répondre `206 Partial Content`
+   avec l'en-tête `Accept-Ranges: bytes`).
+
+Contrôle de la page **en ligne** (les deux conditions, plus les liens sortants) :
+
+```powershell
+node ../_tools/prod-check.js
+# ou depuis cecelove-landing-page :  node _tools/prod-check.js
+```
+
+> 📌 Constat du 15/10/2026 : `cecelove.famatchai226.workers.dev` renvoie `200` (et non `206`)
+> même avec un en-tête `Range` → le serveur ignore le téléchargement par morceaux.
+> Conséquence : la lecture démarre bien (faststart) mais le déplacement dans la timeline
+> reste limité à la partie déjà bufferisée (particulièrement gênant sur iPhone/Safari).
+> Correctif d'hébergement : servir le mp4 depuis un stockage qui gère `Range`
+> (ex. **Cloudflare R2**, bucket public) et mettre à jour la balise `<source>`.
+> Un fichier plus léger (≤ 5 Mo) atténue aussi le problème, le temps que tout soit bufferisé.
+
 ## ⚠️ La bande-annonce doit être « faststart »
 Le lecteur doit pouvoir se déplacer dans la timeline **pendant** le téléchargement.
 Pour cela l'atome `moov` du MP4 doit se trouver **avant** `mdat` :
