@@ -156,15 +156,23 @@ const waitBuffered = `(() => {
     console.log('cible        : ' + PAGE_URL);
     console.log('emulation    : Pixel 7 (390x844, tactile, UA Android)');
 
-    /* le serveur renvoie-t-il 206 ? */
-    const r = await fetch(PAGE_URL + 'assets/trailer.mp4', { headers: { Range: 'bytes=0-1023' } });
+    /* la source reellement servie par la page repond-elle 206 ? */
+    let trailerUrl = PAGE_URL + 'assets/trailer.mp4';
+    try {
+      const page = await fetch(PAGE_URL);
+      const html = await page.text();
+      const m = html.match(/<source src="([^"]+)"[^>]*type="video\/mp4"/);
+      if (m) trailerUrl = /^https?:/i.test(m[1]) ? m[1] : PAGE_URL + m[1].replace(/^\.\//, '');
+    } catch (e) { /* on garde l URL locale par defaut */ }
+    const r = await fetch(trailerUrl, { headers: { Range: 'bytes=0-1023' } });
     const reader = r.body.getReader();
     await reader.read();
     await reader.cancel().catch(() => {});
+    console.log('trailer      : ' + trailerUrl);
     console.log('range test   : HTTP ' + r.status + ' | accept-ranges=' + r.headers.get('accept-ranges') +
       ' | content-range=' + r.headers.get('content-range'));
     if (r.status !== 206) {
-      problems.push('le serveur ignore Range (HTTP ' + r.status + ') -> seek impossible hors zone bufferisee');
+      problems.push('la source servie ignore Range (HTTP ' + r.status + ') -> seek impossible');
     }
 
     chrome = spawn(CHROME, [
@@ -341,6 +349,24 @@ const waitBuffered = `(() => {
       cOk = c1.ok && c2.ok && c3.ok;
       if (!cOk) problems.push('la source alternative ne permet pas non plus le seek');
     }
+
+    /* ============ D. bascule de langue (le script de langue touche a la source video) ============ */
+    console.log('');
+    console.log('=== D. bascule FR <-> EN ===');
+    const langBefore = await evaluate('document.documentElement.lang');
+    await evaluate(`(() => { const b = document.querySelector('.lang-toggle'); if (!b) return null;
+      b.click(); return 1; })()`);
+    await sleep(1500);
+    const langAfter = await evaluate('document.documentElement.lang');
+    const stD = await evaluate(STATE);
+    console.log('langue       : ' + langBefore + ' -> ' + langAfter);
+    printState(stD);
+    const d1 = await evaluate(seekPlaying(0.5));
+    console.log('seek 50% (lecture) : ' + (d1.ok ? 'PASS' : 'BLOQUE') + ' cible=' + d1.target + 's'
+      + ' atteint=' + d1.landed + 's (' + d1.ms + ' ms)');
+    if (langAfter === langBefore) problems.push('la bascule de langue n a rien change (' + langBefore + ')');
+    if (!/trailer\.mp4/.test(stD.src || '')) problems.push('source video perdue apres bascule : ' + stD.src);
+    if (!d1.ok) problems.push('apres bascule de langue, le seek ne fonctionne plus');
 
     /* ============ verdict ============ */
     const mediaLog = await evaluate('(window.__log || []).slice(-30)');

@@ -54,10 +54,14 @@
       const v = get(el.getAttribute('data-i18n-video'));
       if (v !== null) {
         const source = el.querySelector('source');
-        if (source) {
-          source.setAttribute('src', v);
-        }
-        el.load();
+        /* Ne recharger que si la source change réellement (la bande-annonce FR et EN est la même) :
+           sinon el.load() relance le téléchargement complet du mp4 et vide le buffer déjà acquis,
+           ce qui redonne un lecteur impossible à déplacer pendant tout le rechargement. */
+        const changed = source
+          ? source.getAttribute('src') !== v
+          : el.getAttribute('src') !== v;
+        if (source) source.setAttribute('src', v);
+        if (changed) el.load();
       }
     });
 
