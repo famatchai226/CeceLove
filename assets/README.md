@@ -32,13 +32,27 @@ node ../_tools/prod-check.js
 # ou depuis cecelove-landing-page :  node _tools/prod-check.js
 ```
 
-> 📌 Constat du 15/10/2026 : `cecelove.famatchai226.workers.dev` renvoie `200` (et non `206`)
-> même avec un en-tête `Range` → le serveur ignore le téléchargement par morceaux.
-> Conséquence : la lecture démarre bien (faststart) mais le déplacement dans la timeline
-> reste limité à la partie déjà bufferisée (particulièrement gênant sur iPhone/Safari).
-> Correctif d'hébergement : servir le mp4 depuis un stockage qui gère `Range`
-> (ex. **Cloudflare R2**, bucket public) et mettre à jour la balise `<source>`.
-> Un fichier plus léger (≤ 5 Mo) atténue aussi le problème, le temps que tout soit bufferisé.
+> 📌 Constat du 15/10/2026 : `cecelove.famatchai226.workers.dev` (assets statiques Cloudflare
+> Workers) renvoie `200` même avec un en-tête `Range` → il ignore le téléchargement par morceaux.
+> Conséquence **mesurée** (`_tools/mobile-seek-live.js`, Chrome + émulation Pixel 7 sur la page
+> en ligne) : `video.seekable` reste `[[0, 0]]` et **tout** déplacement retombe à 0 s — même avec
+> le fichier entièrement téléchargé (`buffered = [[0, 98.84]]`). Autrement dit : sur mobile, on ne
+> peut ni avancer ni reculer, alors que la simple lecture fonctionne.
+>
+> **Correctif appliqué** : la bande-annonce est servie par un CDN qui gère `Range`
+> → `https://cdn.jsdelivr.net/gh/famatchai226/CeceLove@main/assets/trailer.mp4`
+> (`206` + `Accept-Ranges: bytes` + `Content-Type: video/mp4`) ; seek 90 % et 10 % vérifiés OK.
+> L'URL est déclarée à **trois endroits qui doivent rester identiques** :
+> la 1re balise `<source>` d'`index.html` et `trailer.src` dans `locales/fr.json` + `locales/en.json`
+> (le script de langue remplace la source au chargement). Le 2e `<source>` local
+> (`./assets/trailer.mp4`) sert de secours si le CDN est injoignable — ce repli, lui, n'est pas
+> déplaçable (hôte sans `Range`).
+>
+> Limites de ce CDN : 20 Mo max par fichier (le trailer fait 14,7 Mo), dépôt public obligatoire,
+> et `@main` est mis en cache (jusqu'à 7 jours) — après avoir remplacé la vidéo, purgez le cache
+> jsDelivr ou épinglez un tag/commit dans l'URL. Solution définitive sans dépendance externe :
+> servir le mp4 depuis **Cloudflare R2** (bucket public, `Range` natif) puis remettre l'URL R2
+> dans `index.html` + `locales/*.json` (`_tools/check-links.js` contrôle les trois).
 
 ## ⚠️ La bande-annonce doit être « faststart »
 Le lecteur doit pouvoir se déplacer dans la timeline **pendant** le téléchargement.

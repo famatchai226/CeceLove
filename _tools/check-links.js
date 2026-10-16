@@ -18,6 +18,14 @@ function findRoot(start) {
 const ROOT = findRoot(__dirname);
 const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 
+/* La bande-annonce est servie par un CDN qui gère les requêtes HTTP Range : sans Range,
+   `video.seekable` reste [[0, 0]] et avancer/reculer devient impossible sur mobile
+   (cecelove.famatchai226.workers.dev répond 200 au lieu de 206 sur un Range).
+   Le mp4 doit donc rester dans le dépôt public (source du CDN) et le fichier local en secours. */
+const TRAILER_CDN = 'https://cdn.jsdelivr.net/gh/famatchai226/CeceLove@main/assets/trailer.mp4';
+const TRAILER_LOCAL = './assets/trailer.mp4';
+const TRAILER_CDN_MAX = 20 * 1024 * 1024; /* limite jsDelivr pour un fichier @gh */
+
 const anchors = [...html.matchAll(/<a href="(https?:\/\/[^"]+)"[\s\S]{0,200}?data-i18n="([^"]+)"/g)];
 console.log('--- tous les CTA externes de la page (clé i18n -> URL) ---');
 anchors.forEach(a => console.log('  ' + a[2].padEnd(18) + ' ' + a[1]));
@@ -65,7 +73,7 @@ console.log('');
 console.log('--- cohérence des fichiers de langue ---');
 for (const lang of ['fr', 'en']) {
   const json = JSON.parse(fs.readFileSync(path.join(ROOT, 'locales', lang + '.json'), 'utf8'));
-  ck(json.trailer && json.trailer.src === './assets/trailer.mp4',
+  ck(json.trailer && json.trailer.src === TRAILER_CDN,
     lang + '.json trailer.src = ' + (json.trailer && json.trailer.src));
   ck(!!(json.upsell && json.upsell.balta_btn && json.upsell.bd_btn),
     lang + '.json upsell : "' + json.upsell.balta_btn + '" / "' + json.upsell.bd_btn + '"');
@@ -76,6 +84,10 @@ console.log('--- média ---');
 const mp4 = fs.readFileSync(path.join(ROOT, 'assets', 'trailer.mp4'));
 const secondBox = mp4.toString('ascii', mp4.readUInt32BE(0) + 4, mp4.readUInt32BE(0) + 8);
 ck(secondBox === 'moov', 'trailer.mp4 : second atome = ' + secondBox + ' (faststart)');
+ck(html.includes('src="' + TRAILER_CDN + '"'), 'index.html : 1er <source> = CDN qui gère Range');
+ck(html.includes('src="' + TRAILER_LOCAL + '"'), 'index.html : 2e <source> = secours ' + TRAILER_LOCAL);
+ck(mp4.length < TRAILER_CDN_MAX, 'trailer.mp4 = ' + (mp4.length / 1048576).toFixed(1)
+  + ' Mo (< 20 Mo, limite du CDN jsDelivr)');
 
 console.log('');
 console.log(problems ? 'RESULT: ' + problems + ' PROBLEM(S)' : 'RESULT: ALL CHECKS PASSED');

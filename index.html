@@ -1153,6 +1153,10 @@
       </div>
       <div class="video-wrap">
         <video controls playsinline preload="metadata" data-i18n-video="trailer.src" poster="./assets/hero%20caroussel/0.png">
+          <!-- La bande-annonce est servie par un CDN qui gère les requêtes HTTP Range
+               (indispensable pour avancer/reculer dans la vidéo sur mobile) ;
+               le fichier local reste en secours si le CDN est injoignable. -->
+          <source src="https://cdn.jsdelivr.net/gh/famatchai226/CeceLove@main/assets/trailer.mp4" type="video/mp4" />
           <source src="./assets/trailer.mp4" type="video/mp4" />
         </video>
       </div>

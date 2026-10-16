@@ -32,7 +32,7 @@
     "label": "Bande-annonce",
     "title": "Un aperçu de <em>CeceLove</em>",
     "subtitle": "Plongez dans l'ambiance du film avant de le regarder en intégralité.",
-    "src": "./assets/trailer.mp4",
+    "src": "https://cdn.jsdelivr.net/gh/famatchai226/CeceLove@main/assets/trailer.mp4",
     "note": "🔒 Lecture 100% privée et sécurisée."
   },
   "synopsis": {
