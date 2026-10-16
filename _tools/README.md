@@ -37,7 +37,8 @@ Chrome headless via le DevTools Protocol, ouvre la vraie page `index.html` et :
 2. teste 5 seeks sur la timeline (en pause) + 1 seek **pendant la lecture**,
 3. vérifie via `elementFromPoint` que rien ne recouvre le lecteur,
 4. clique **réellement** sur la barre de progression et vérifie que `currentTime` bouge,
-5. mesure le nombre d'octets réellement servis.
+5. mesure le nombre d'octets servis par le serveur local (0 pour la vidéo depuis qu'elle est
+   servie par le CDN — voir la note affichée).
 
 ```powershell
 node _tools/seek-test-cecelove.js                  # 1200 Ko/s par défaut

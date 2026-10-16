@@ -156,6 +156,11 @@ function reportStats() {
   console.log('HTTP requests     : ' + stats.requests + ' (' + stats.rangeRequests + ' range requests)');
   console.log('trailer bytes sent: ' + stats.videoBytes + ' / ' + fileSize
     + ' bytes (' + pct + '% of the file)');
+  if (!stats.videoBytes) {
+    console.log('                    Note : ces compteurs ne concernent que ce serveur local. La');
+    console.log('                    bande-annonce etant servie par le CDN (voir assets/README.md),');
+    console.log('                    la video ne passe plus par ici : les 0 octets sont normaux.');
+  }
   return { fileSize, pct: parseFloat(pct) };
 }
 
