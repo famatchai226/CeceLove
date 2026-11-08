@@ -1,10 +1,11 @@
 /* Contrôle de la page EN LIGNE (production) :
    1. la page répond 200 ;
-   2. les 6 CTA ont les bonnes cibles (upsell -> landing pages, achat -> checkout) ;
+   2. les 7 CTA ont les bonnes cibles (upsell -> landing pages, achat -> checkout) ;
    3. chaque balise <source> de la bande-annonce est testée : type MIME, faststart, et
       surtout support HTTP `Range` (`206` + `Accept-Ranges: bytes`). Sans Range le navigateur
       interdit tout déplacement dans la vidéo (`video.seekable` = [[0, 0]]) même si le fichier
-      est entièrement téléchargé — c'est ce qui bloquait le seek sur mobile.
+      est entièrement téléchargé — c'est ce qui bloquait le seek sur mobile ;
+   4. les visuels des cartes d'upsell répondent (200/206) avec un content-type image/*.
 
    Usage:
      node _tools/prod-check.js
@@ -14,8 +15,9 @@ const BASE = (process.argv[2] || 'https://cecelove.famatchai226.workers.dev/').r
 
 const CHECKOUT = 'https://baltazar.mymaketou.shop/products/veux-un-film-pour-homme-mature/checkout';
 const LANDING = {
-  'upsell.balta_btn': 'https://balta.famatchai226.workers.dev/',
-  'upsell.bd_btn': 'https://bd.famatchai226.workers.dev/'
+  'upsell.shop_btn': 'https://boutique-landing-page.famatchai226.workers.dev/',
+  'upsell.cece_btn': 'https://cecelove2.famatchai226.workers.dev/',
+  'upsell.balta_btn': 'https://balta.famatchai226.workers.dev/'
 };
 
 let fail = 0;
@@ -97,6 +99,29 @@ const ww = msg => { warn++; console.log('WARN  ' + msg); };
   }
 
   console.log('');
+  console.log('--- 4. visuels des cartes d\'upsell ---');
+  const gridStart = html.indexOf('<div class="upsell-grid">');
+  const gridEnd = html.indexOf('</section>', gridStart);
+  const upsellBlock = gridStart >= 0 && gridEnd > gridStart ? html.slice(gridStart, gridEnd) : '';
+  const upsellImgs = [...upsellBlock.matchAll(/<img[^>]+src="([^"]+)"/g)].map(m => m[1]);
+  if (!upsellImgs.length) ww('aucun visuel dans les cartes d\'upsell (texte seul ?)');
+  for (const src of upsellImgs) {
+    const url = abs(src);
+    try {
+      /* une plage d'un seul octet suffit : l'image entière n'est pas téléchargée */
+      const res = await fetch(url, { headers: { Range: 'bytes=0-1' } });
+      const type = res.headers.get('content-type') || '';
+      if (res.body) await res.body.cancel().catch(() => {});
+      if (res.status !== 200 && res.status !== 206) ko('  HTTP ' + res.status + '  ' + url);
+      else if (!type.startsWith('image/')) ko('  HTTP ' + res.status + ' ' + type + ' (attendu image/*)  ' + url);
+      else pass('  HTTP ' + res.status + ' ' + type + '  ' + url);
+    } catch (e) {
+      ko('  ' + e.message + '  ' + url);
+    }
+  }
+
+  console.log('');
+
   console.log(fail || warn
     ? 'RESULT: ' + fail + ' FAIL / ' + warn + ' WARN'
     : 'RESULT: ALL CHECKS PASSED');

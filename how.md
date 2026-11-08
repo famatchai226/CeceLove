@@ -33,8 +33,30 @@ cecelove-landing-page/
 
   | Bouton (`data-i18n`) | Destination |
   |---|---|
+  | `upsell.shop_btn` — Voir la boutique complète → | `https://boutique-landing-page.famatchai226.workers.dev/` |
+  | `upsell.cece_btn` — Voir CeceLove 2 → | `https://cecelove2.famatchai226.workers.dev/` |
   | `upsell.balta_btn` — Voir l'offre Baltazar → | `https://balta.famatchai226.workers.dev/` |
-  | `upsell.bd_btn` — Voir l'offre BD → | `https://bd.famatchai226.workers.dev/` |
+
+  > 📌 **Règle produit : exactement 3 cartes d'upsell** — la boutique complète, CeceLove 2
+  > (l'autre volet) et Baltazar. Les autres pages produits ne sont plus proposées ici.
+  > `check-links.js` compte les cartes et échoue s'il y en a plus ou moins.
+  >
+  > ✅ `https://cecelove2.famatchai226.workers.dev/` est **en ligne** (page CeceLove 2 déployée) :
+  > le bouton mène directement à l'autre volet, médias et checkout compris.
+
+  Chaque carte porte le **visuel du produit**, servi en **URL absolue** par le Worker du
+  produit (aucun fichier à embarquer dans ce dossier) :
+
+  | Carte | Visuel |
+  |---|---|
+  | La boutique complète | mosaïque 2 × 2 des couvertures de `boutique-landing-page/assets/products/` : `kera.jpg`, `bd.jpg`, `secrets369.jpg`, `gotelegram.jpg` |
+  | CeceLove 2 | `https://cecelove2.famatchai226.workers.dev/assets/hero%20caroussel/0.png` |
+  | Pack Baltazar | `https://balta.famatchai226.workers.dev/assets/hero%20caroussel/0.jpeg` |
+
+  > 🖼️ Vignettes carrées (`.upsell-thumb` : `aspect-ratio: 1 / 1` + `object-fit: cover`) collées
+  > aux bords de la carte (`overflow: hidden` sur `.upsell-card`), en `loading="lazy"` puisque la
+  > section est en bas de page. `check-links.js` exige **6 visuels** (mosaïque 4 + 1 + 1), chacun
+  > avec `alt` et en URL absolue ; `prod-check.js` vérifie qu'ils répondent bien en ligne.
 
   Contrôle automatique des deux familles de liens + cohérence FR/EN :
   `node _tools/check-links.js` (doit finir par `RESULT: ALL CHECKS PASSED`).

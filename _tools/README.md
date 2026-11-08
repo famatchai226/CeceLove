@@ -58,11 +58,16 @@ Code de sortie `0` = la vidéo se scrube correctement.
 
 ## 4. `check-links.js` — liens sortants & fichiers de langue
 Liste tous les CTA externes d'`index.html` (clé i18n → URL) et vérifie :
-- les **boutons d'upsell** → landing pages des produits sœurs
-  (`balta.famatchai226.workers.dev`, `bd.famatchai226.workers.dev`), croisées avec
-  la source de vérité `../boutique-landing-page/how.md` ;
+- les **boutons d'upsell** → landing pages des produits sœurs — **3 cartes exactement** :
+  la boutique complète (`boutique-landing-page.famatchai226.workers.dev`), CeceLove 2
+  (`cecelove2.famatchai226.workers.dev`) et Baltazar (`balta.famatchai226.workers.dev`) —
+  croisées avec la source de vérité `../boutique-landing-page/how.md` ;
 - les **4 boutons d'achat** → checkout MyMaketou du film CeceLove ;
 - `fr.json` / `en.json` valides + vidéo bien en faststart.
+- les **visuels des cartes d'upsell** : **6 `<img>`** au total (mosaïque 2 × 2 pour la carte
+  « boutique complète » + 1 pour chacune des deux autres), tous en **URL absolue**
+  (Worker du produit), avec
+  `alt` et `loading="lazy"` ;
 
 ```powershell
 node _tools/check-links.js      # code de sortie 0 = tout est vert
@@ -71,11 +76,13 @@ node _tools/check-links.js      # code de sortie 0 = tout est vert
 ## 5. `prod-check.js` — contrôle de la page EN LIGNE
 Interroge l'URL déployée (par défaut `https://cecelove.famatchai226.workers.dev/`) et vérifie :
 1. la page répond `200` ;
-2. les 6 CTA de la version en ligne pointent sur les bonnes cibles
+2. les 7 CTA de la version en ligne pointent sur les bonnes cibles
    (upsell → landing pages sœurs, achat → checkout) ;
 3. chaque balise `<source>` de la bande-annonce (CDN principal + secours local) est testée :
    type MIME, **faststart**, et support des requêtes **`Range`** (`206` + `Accept-Ranges: bytes`),
    condition indispensable pour se déplacer dans la vidéo pendant la lecture.
+4. les **visuels de l'upsell** répondent en ligne (`200`/`206`) avec un `content-type: image/*` :
+   une vignette cassée sur un Worker frère se voit immédiatement.
 
 ```powershell
 node _tools/prod-check.js

@@ -885,7 +885,7 @@
     /* ===================== UPSELL ===================== */
     .upsell-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.3rem;
     }
 
@@ -897,6 +897,38 @@
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+      overflow: hidden; /* la vignette épouse les coins arrondis de la carte */
+    }
+
+    /* vignette : elle déborde du padding pour toucher les bords de la carte */
+    .upsell-thumb {
+      margin: -1.7rem -1.5rem 0.9rem;
+      aspect-ratio: 1 / 1;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .upsell-thumb img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+    }
+
+    /* carte « la boutique complète » : mosaïque 2 x 2 des couvertures du catalogue */
+    .upsell-thumb--mosaic {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+    }
+
+    /* les couvertures du catalogue sont des affiches : on garde leur centre */
+    .upsell-thumb--mosaic img {
+      object-position: center;
     }
 
     .upsell-card h3 {
@@ -914,6 +946,12 @@
     .upsell-card .btn-ghost {
       align-self: flex-start;
       margin-top: auto;
+    }
+
+    @media (max-width: 980px) {
+      .upsell-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     @media (max-width: 720px) {
@@ -1406,16 +1444,34 @@
       </div>
       <div class="upsell-grid">
         <div class="upsell-card">
+          <div class="upsell-thumb upsell-thumb--mosaic">
+            <img src="https://boutique-landing-page.famatchai226.workers.dev/assets/products/kera.jpg" alt="Pack Influenceuse KERA" loading="lazy" />
+            <img src="https://boutique-landing-page.famatchai226.workers.dev/assets/products/bd.jpg" alt="Pack 14 838 BD adultes" loading="lazy" />
+            <img src="https://boutique-landing-page.famatchai226.workers.dev/assets/products/secrets369.jpg" alt="Les 369 Secrets Africains" loading="lazy" />
+            <img src="https://boutique-landing-page.famatchai226.workers.dev/assets/products/gotelegram.jpg" alt="Guide Télégram" loading="lazy" />
+          </div>
+          <h3 data-i18n="upsell.shop_title">La boutique complète — 6 collections premium</h3>
+          <p data-i18n="upsell.shop_desc">Tout le catalogue en un seul endroit : Baltazar, KERA, Influenceuse, BD, 369 Secrets et le guide Télégram.</p>
+          <a href="https://boutique-landing-page.famatchai226.workers.dev/"
+            class="btn-ghost" target="_blank" rel="noopener" data-i18n="upsell.shop_btn">Voir la boutique complète →</a>
+        </div>
+        <div class="upsell-card">
+          <div class="upsell-thumb">
+            <img src="https://cecelove2.famatchai226.workers.dev/assets/hero%20caroussel/0.png" alt="Affiche CeceLove 2" loading="lazy" />
+          </div>
+          <h3 data-i18n="upsell.cece_title">CeceLove 2 — la suite explicite (+18)</h3>
+          <p data-i18n="upsell.cece_desc">1 h 52 d'édition adulte : plus long, plus cru, sans aucune censure.</p>
+          <a href="https://cecelove2.famatchai226.workers.dev/"
+            class="btn-ghost" target="_blank" rel="noopener" data-i18n="upsell.cece_btn">Voir CeceLove 2 →</a>
+        </div>
+        <div class="upsell-card">
+          <div class="upsell-thumb">
+            <img src="https://balta.famatchai226.workers.dev/assets/hero%20caroussel/0.jpeg" alt="Pack Baltazar" loading="lazy" />
+          </div>
           <h3 data-i18n="upsell.balta_title">Pack Baltazar (+2103 Vidéos, Photos &amp; BD)</h3>
           <p data-i18n="upsell.balta_desc">La collection complète Baltazar en un seul canal privé.</p>
           <a href="https://balta.famatchai226.workers.dev/"
             class="btn-ghost" target="_blank" rel="noopener" data-i18n="upsell.balta_btn">Voir l'offre Baltazar →</a>
-        </div>
-        <div class="upsell-card">
-          <h3 data-i18n="upsell.bd_title">Pack +14 838 BD &amp; Mangas pour Adultes</h3>
-          <p data-i18n="upsell.bd_desc">Collection exclusive de bandes dessinées adultes.</p>
-          <a href="https://bd.famatchai226.workers.dev/"
-            class="btn-ghost" target="_blank" rel="noopener" data-i18n="upsell.bd_btn">Voir l'offre BD →</a>
         </div>
       </div>
     </div>

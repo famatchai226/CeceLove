@@ -104,12 +104,15 @@
   "upsell": {
     "label": "Recommandé pour vous",
     "title": "Nos Offres Premium Exclusives",
+    "shop_title": "La boutique complète — 6 collections premium",
+    "shop_desc": "Tout le catalogue en un seul endroit : Baltazar, KERA, Influenceuse, BD, 369 Secrets et le guide Télégram.",
+    "shop_btn": "Voir la boutique complète →",
+    "cece_title": "CeceLove 2 — la suite explicite (+18)",
+    "cece_desc": "1 h 52 d'édition adulte : plus long, plus cru, sans aucune censure.",
+    "cece_btn": "Voir CeceLove 2 →",
     "balta_title": "Pack Baltazar (+2103 Vidéos, Photos & BD)",
     "balta_desc": "La collection complète Baltazar en un seul canal privé.",
-    "balta_btn": "Voir l'offre Baltazar →",
-    "bd_title": "Pack +14 838 BD & Mangas pour Adultes",
-    "bd_desc": "Collection exclusive de bandes dessinées adultes.",
-    "bd_btn": "Voir l'offre BD →"
+    "balta_btn": "Voir l'offre Baltazar →"
   },
   "footer": {
     "contact_intro": "Un problème ? Contactez-nous :",
