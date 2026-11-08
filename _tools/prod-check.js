@@ -60,7 +60,14 @@ const ww = msg => { warn++; console.log('WARN  ' + msg); };
   const abs = u => /^https?:/i.test(u) ? u : BASE + u.replace(/^\.\//, '');
 
   const checkSource = async (url, critical) => {
-    const res = await fetch(url, { headers: { Range: 'bytes=0-1023' } });
+    let res;
+    try {
+      res = await fetch(url, { headers: { Range: 'bytes=0-1023' } });
+    } catch (e) {
+      /* un host injoignable (DNS local, coupure reseau) ne doit pas masquer les autres controles */
+      (critical ? ko : ww)('  injoignable depuis ce poste : ' + e.message + '  ' + url);
+      return;
+    }
     const rangeOk = res.status === 206;
     const acceptRanges = res.headers.get('accept-ranges');
     const contentRange = res.headers.get('content-range');
