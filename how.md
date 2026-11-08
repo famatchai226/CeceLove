@@ -49,7 +49,7 @@ cecelove-landing-page/
 
   | Carte | Visuel |
   |---|---|
-  | La boutique complète | mosaïque 2 × 2 des couvertures de `boutique-landing-page/assets/products/` : `kera.jpg`, `bd.jpg`, `secrets369.jpg`, `gotelegram.jpg` |
+  | La boutique complète | mosaïque 2 × 2 des couvertures de `boutique-landing-page/assets/products/` : `kera.jpg`, `bd.jpg`, `pastor.png`, `gotelegram.jpg` |
   | CeceLove 2 | `https://cecelove2.famatchai226.workers.dev/assets/hero%20caroussel/0.png` |
   | Pack Baltazar | `https://balta.famatchai226.workers.dev/assets/hero%20caroussel/0.jpeg` |
 
