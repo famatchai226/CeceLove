@@ -11,7 +11,8 @@
     "badge": "🔥 Film Exclusif — Édition Limitée",
     "title": "<em>CeceLove</em><br />Le film qui réveille<br />l'homme mature 🔥",
     "desc": "Une histoire intense, filmée avec un réalisme rare. <strong>Accès immédiat et 100% discret</strong> — le lien est livré dans votre email dès le paiement.",
-    "cta": "⚡ Regarder CeceLove — 1 500 FCFA",
+    "cta": "🛒 Acheter maintenant — 1 500 FCFA",
+    "proof": "⭐ +1 500 spectateurs ont déjà regardé CeceLove",
     "price_note": "Paiement unique · Accès à vie",
     "trust_secure": "Paiement sécurisé",
     "trust_instant": "Accès instantané",
@@ -38,13 +39,13 @@
   "synopsis": {
     "label": "L'histoire",
     "title": "CeceLove, <em>une expérience à part</em>",
-    "p1": "CeceLove raconte la rencontre brûlante entre deux êtres que tout oppose, portée par une mise en scène cinématographique et une intensité rarement atteinte dans ce genre.",
-    "p2": "Chaque plan a été pensé pour créer une immersion totale. Lumière travaillée, cadrage soigné, montage rythmé : un film conçu pour captiver dès les premières secondes.",
+    "p1": "CeceLove raconte la rencontre brûlante de deux êtres que tout oppose, portée par une mise en scène cinématographique.",
+    "p2": "Chaque plan est pensé pour l'immersion : lumière travaillée, cadrage soigné, montage rythmé.",
     "quote": "« Un film qui ne ressemble à aucun autre. »"
   },
   "offer": {
     "label": "Ce que vous recevez",
-    "title": "Voici exactement ce que<br />vous obtenez :",
+    "title": "Tout est déjà inclus",
     "desc": "Un lien de visionnage privé vers le film complet CeceLove.",
     "card1_label": "Film complet",
     "card1_title": "CeceLove en HD",
@@ -75,8 +76,11 @@
     "label": "Avis spectateurs",
     "title": "+1 500 spectateurs<br />l'ont déjà regardé",
     "t1_text": "Reçu le lien en moins de 2 minutes. Le film est encore mieux que ce que j'imaginais.",
+    "t1_author": "Fatou, Dakar",
     "t2_text": "Discret, rapide et vraiment de qualité. Rien à redire.",
+    "t2_author": "Bertrand, Abidjan",
     "t3_text": "Un film qui tient ses promesses du début à la fin. Bravo 👌",
+    "t3_author": "Mariam, Bamako",
     "cta_text": "Rejoignez les <strong style=\"color:var(--primary);\">1 500 spectateurs satisfaits</strong>."
   },
   "faq": {
@@ -97,7 +101,8 @@
     "promo_label": "🔥 LA PROMO EST DISPONIBLE UNIQUEMENT POUR TOUT DE SUITE",
     "title": "Prêt à découvrir<br />CeceLove ?",
     "subtitle": "Accès instantané · Paiement sécurisé · 100% Discret",
-    "btn": "🛒 Acheter Maintenant — 1 500 FCFA",
+    "btn": "🛒 Acheter maintenant — 1 500 FCFA",
+    "proof": "⭐ +1 500 spectateurs satisfaits · Accès immédiat",
     "warning": "⚠️ <strong>Important :</strong> Assurez-vous d'insérer correctement votre email. Vous pouvez utiliser un <strong>pseudonyme</strong>.",
     "payment_methods": "Wave, Orange Money, MTN momo, Moov money, Visa, MasterCard"
   },

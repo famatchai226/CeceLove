@@ -11,7 +11,8 @@
     "badge": "🔥 Exclusive Film — Limited Edition",
     "title": "<em>CeceLove</em><br />The film that awakens<br />the mature man 🔥",
     "desc": "An intense story, filmed with rare realism. <strong>Instant and 100% discreet access</strong> — the link is delivered to your email right after payment.",
-    "cta": "⚡ Watch CeceLove — 1,500 FCFA",
+    "cta": "🛒 Buy Now — 1,500 FCFA",
+    "proof": "⭐ 1,500+ viewers have already watched CeceLove",
     "price_note": "One-time payment · Lifetime access",
     "trust_secure": "Secure Payment",
     "trust_instant": "Instant Access",
@@ -38,13 +39,13 @@
   "synopsis": {
     "label": "The story",
     "title": "CeceLove, <em>an experience like no other</em>",
-    "p1": "CeceLove tells the scorching encounter between two people that everything opposes, carried by cinematic staging and an intensity rarely reached in this genre.",
-    "p2": "Every shot was designed to create total immersion. Crafted lighting, careful framing, rhythmic editing: a film built to captivate from the very first seconds.",
+    "p1": "CeceLove tells the scorching encounter of two people that everything opposes, carried by cinematic staging.",
+    "p2": "Every shot is built for immersion: crafted lighting, careful framing, rhythmic editing.",
     "quote": "\"A film like no other.\""
   },
   "offer": {
     "label": "What you get",
-    "title": "Here's exactly what<br />you will receive:",
+    "title": "Everything is included",
     "desc": "A private streaming link to the full CeceLove film.",
     "card1_label": "Full film",
     "card1_title": "CeceLove in HD",
@@ -75,8 +76,11 @@
     "label": "Viewer reviews",
     "title": "+1,500 viewers<br />have already watched it",
     "t1_text": "Got the link in less than 2 minutes. The film is even better than I imagined.",
+    "t1_author": "Fatou, Dakar",
     "t2_text": "Discreet, fast and truly high quality. Nothing to complain about.",
+    "t2_author": "Bertrand, Abidjan",
     "t3_text": "A film that keeps its promises from start to finish. Bravo 👌",
+    "t3_author": "Mariam, Bamako",
     "cta_text": "Join the <strong style=\"color:var(--primary);\">1,500 satisfied viewers</strong>."
   },
   "faq": {
@@ -98,6 +102,7 @@
     "title": "Ready to discover<br />CeceLove?",
     "subtitle": "Instant Access · Secure Payment · 100% Discreet",
     "btn": "🛒 Buy Now — 1,500 FCFA",
+    "proof": "⭐ 1,500+ satisfied viewers · Instant access",
     "warning": "⚠️ <strong>Important:</strong> Make sure to enter your email correctly. You can use a <strong>pseudonym</strong>.",
     "payment_methods": "Wave, Orange Money, MTN momo, Moov money, Visa, MasterCard"
   },
